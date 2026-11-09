@@ -41,9 +41,9 @@ Chọn **top 3 bài toán** từ danh sách trên và hoàn thiện **3 Quick Pr
 │ QUICK PROBLEM CARD #1                                     │
 │                                                             │
 │ Bài toán: Tài xế XanhSM muốn nắm được thông tin khu vực có nhu cầu cao để tăng thu nhập │
-│ Công ty thành viên: [x] Xanh SM    │
+│ Công ty thành viên: [x] Xanh SM                             │
 │                                                             │
-│ Ai đang đau (Actor)? Tài xế │
+│ Ai đang đau (Actor)? Tài xế                                 │
 │                                                             │
 │ Workflow thủ công hiện tại (3-5 bước):                      │
 │   1. Truy cập vào các diễn đàn ──> 2. Tìm kiếm thông tin khu vực đông khách ──> 3. Di chuyển xe tới địa điểm                 │
@@ -53,7 +53,7 @@ Chọn **top 3 bài toán** từ danh sách trên và hoàn thiện **3 Quick Pr
 │                                                             │
 │ Đo thành công bằng gì (Metric có số)? Giảm thời gian tìm kiếm từ 30 phút - > 3 phút │
 │                                                             │
-│ Quick Architecture: [x] Agent (Tự động thu thập dữ liệu từ quá khứ, dữ liệu nhu cầu tùy vị trí, thời tiết,... và đưa ra gợi ý địa điểm) │
+│ Quick Architecture: [x] Agent (Tự động thu thập dữ liệu từ quá khứ, dữ liệu nhu cầu tùy vị trí, thời tiết,... và đưa ra gợi ý địa điểm)                                │
 └─────────────────────────────────────────────────────────────┘
 ```
 ```
