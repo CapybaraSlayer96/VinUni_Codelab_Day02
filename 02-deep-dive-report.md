@@ -56,7 +56,7 @@ Phase 4 (Validation + Research) trước khi chốt vào Problem Statement v1.
 | **1. Actor / Operator** | Điều phối viên (Dispatcher) thuộc Trung tâm Điều vận Xanh SM; đối tượng chịu ảnh hưởng gián tiếp là tài xế đang chờ xử lý sự cố. |
 | **2. Current Workflow** | Khi tài xế báo hết pin, điều phối viên: (1) nhận cuộc gọi, (2) tra vị trí GPS xe trên bản đồ nội bộ, (3) mở dashboard trạm sạc VinFast để tìm trụ trống gần nhất phù hợp dòng xe, (4) soạn tin nhắn chỉ dẫn gửi qua App tài xế, (5) gọi xe cứu hộ nếu pin dưới ngưỡng an toàn. 5 bước, hoàn toàn thủ công. |
 | **3. Bottleneck** | Bước 3 & 4: tra cứu thủ công trụ sạc trống đúng loại cổng sạc (CCS2/GB-T) theo dòng xe (VF5/VFe34/VF8/VF9), và soạn thảo tin nhắn hướng dẫn đường đi bằng tiếng Việt rõ ràng, dễ hiểu cho tài xế đang gấp. |
-| **4. Business Impact** | Mỗi sự cố tốn ~10 phút thao tác thủ công của điều phối viên ở bước nghẽn; nhân lực điều vận bị chiếm dụng trong giờ cao điểm, kéo dài thời gian tài xế chờ → tăng rủi ro hủy chuyến/khách chờ lâu. *(Số liệu quy mô — bao nhiêu sự cố/ngày tại Hà Nội — cần nhóm xác thực thật ở Phase 4, hiện chưa có.)* |
+| **4. Business Impact** | Mỗi sự cố tốn ~10 phút thao tác thủ công của điều phối viên ở bước nghẽn; nhân lực điều vận bị chiếm dụng trong giờ cao điểm, kéo dài thời gian tài xế chờ → tăng rủi ro hủy chuyến/khách chờ lâu. Xem dự báo tác động định lượng ở mục **3.4** bên dưới. *(Số liệu quy mô thật — bao nhiêu sự cố/ngày tại Hà Nội — cần nhóm xác thực ở Phase 4, hiện mới là ước tính từ benchmark công khai.)* |
 | **5. Success Metric** | (a) Giảm thời gian xử lý sự cố từ ~15 phút xuống dưới 5 phút/lượt (Efficiency). (b) Tỉ lệ hướng dẫn đúng địa điểm + đúng loại trụ sạc đạt ≥95% (Quality). *(Baseline "15 phút" là ước lượng — cần số thật trước khi tính vào bản v1.)* |
 | **6. Operational Boundary** | AI được phép: truy xuất API định vị xe, API trạm sạc VinFast còn trống, tự động soạn **draft** tin nhắn hướng dẫn. **CẤM:** AI không được tự động gửi tin đi mà không có điều phối viên phê duyệt (bắt buộc HITL); không được đề xuất trạm sạc cách xe >5km khi pin báo <5% (rủi ro xe cạn pin giữa đường) — trường hợp này phải tự động đề xuất điều xe cứu hộ pin di động thay vì chỉ đường. |
 
@@ -89,6 +89,39 @@ Phase 4 (Validation + Research) trước khi chốt vào Problem Statement v1.
 ```
 
 **Kỳ vọng cải thiện:** rút thời gian xử lý bước 3-4 từ ~10 phút xuống còn vài giây (AI tự động tra + draft), điều phối viên chỉ cần đọc lướt + duyệt gửi (~1 phút) — tổng quy trình có thể về dưới 5 phút/lượt.
+
+---
+
+## 3.4. Dự báo tác động kinh doanh (Business Impact Forecast)
+
+Theo yêu cầu của giảng viên: mọi ý tưởng phải được quy về số liệu. Nhóm không có dữ liệu nội bộ Xanh SM, nên dùng **benchmark công khai** làm cơ sở ước tính — số liệu dưới đây là **ước tính bậc độ lớn, có nguồn trích dẫn, không phải cam kết hiệu quả**.
+
+**Input benchmark (có nguồn):**
+- Quy mô đội xe: GSM/Xanh SM có **>30.000 xe taxi điện toàn quốc**, chiếm **54,5% thị phần taxi công nghệ** tại Việt Nam Q1/2026 (nguồn: Mordor Intelligence, dẫn lại qua [greensm.com](https://www.greensm.com/vn-vi/news/chiem-gan-45-thi-phan-xanh-sm-ngay-cang-vuot-xa-cac-doi-thu-tren-thi-truong)).
+- Lương điều phối viên/tổng đài viên tại Việt Nam: phổ biến **7-15 triệu VNĐ/tháng** (nguồn: [JobsGO](https://jobsgo.vn/viec-lam-dieu-phoi-vien-tai-ho-chi-minh.html)), lấy trung vị **10 triệu VNĐ/tháng ≈ 45.000đ/giờ công** (giả định ~220 giờ công/tháng).
+
+**Giả định tính toán (cần Xanh SM xác nhận ở Phase 4):**
+- Tỷ lệ ca vận hành/ngày phát sinh sự cố pin cần điều phối hỗ trợ: **0,5-1%**.
+- Thời gian xử lý thủ công hiện tại ở bước nghẽn (3-4): **~10 phút/sự cố**.
+- AI giúp giảm **~80%** thời gian ở bước nghẽn (điều phối viên chỉ cần đọc + duyệt).
+
+**Kết quả ước tính:**
+
+| Chỉ số | Ước tính |
+|---|---|
+| Số sự cố/ngày toàn quốc | 150–300 sự cố (0,5-1% × 30.000 xe) |
+| Thời gian công điều phối tiêu tốn/ngày | 25–50 giờ công (150-300 sự cố × 10 phút) |
+| **Tiết kiệm thời gian** nếu áp dụng AI | ~20–40 giờ công/ngày (giảm 80%) |
+| **Tiết kiệm chi phí** (giờ công × 45.000đ/giờ) | ~**35–70 triệu VNĐ/tháng** toàn quốc |
+| **Giảm rủi ro** | Giảm nguy cơ xe cạn pin giữa đường (tắc nghẽn giao thông, mất an toàn) + giảm tỷ lệ hủy chuyến do tài xế chờ lâu → **bảo toàn doanh thu cuốc xe** (chưa định lượng được vì thiếu số liệu tỷ lệ hủy chuyến thật) |
+| **Tăng doanh thu gián tiếp** | Tài xế được giải cứu nhanh hơn → sớm quay lại đón khách → tăng số cuốc/ngày/xe (chưa định lượng, cần dữ liệu vận hành thật) |
+
+**Diễn giải theo 3 nhóm lợi ích doanh nghiệp (theo đúng khung thầy yêu cầu):**
+1. **Tiết kiệm thời gian:** ~20-40 giờ công điều phối/ngày toàn quốc.
+2. **Tiết kiệm/tăng doanh thu:** ~35-70 triệu VNĐ/tháng tiền công tiết kiệm trực tiếp + doanh thu cuốc xe được bảo toàn gián tiếp (chưa định lượng được phần này do thiếu baseline tỷ lệ hủy chuyến thật).
+3. **Giảm rủi ro:** giảm rủi ro an toàn giao thông (xe cạn pin giữa đường) và rủi ro vận hành (điều phối viên quá tải giờ cao điểm dẫn đến xử lý sai/chậm các ca khác).
+
+> ⚠️ Toàn bộ số liệu trên là **ước tính minh họa dựa trên benchmark công khai**, phục vụ mục đích so sánh/ra quyết định trong bài lab — **không phải số liệu tài chính chính thức của Xanh SM**. Trước khi đưa vào Problem Statement v1 (Phase 6), nhóm cần Xanh SM xác nhận: (a) tỷ lệ sự cố pin thật/ngày, (b) thời gian xử lý thật qua log hệ thống, (c) cơ cấu lương thật của điều phối viên.
 
 ---
 
