@@ -1,0 +1,21 @@
+name: Block prompt_prototype.py on main
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-for-prompt-prototype:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR code
+        uses: actions/checkout@v4
+
+      - name: Verify prompt_prototype.py is not present
+        run: |
+          if [ -f "promp_prototype.py" ]; then
+            echo "❌ Error: prompt_prototype.py must not be included when merging into main."
+            exit 1
+          fi
+          echo "✅ Check passed: prompt_prototype.py is not present."
