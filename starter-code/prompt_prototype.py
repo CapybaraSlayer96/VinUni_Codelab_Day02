@@ -2,6 +2,10 @@
 Day 2 — AI Product Scoping (Vin Smart Future)
 Lightweight Prompt Boundary Prototyping (Starter Code)
 
+Nhom: The Hive
+Thanh vien thuc hien file nay: Vu Tien Hung - hungvu.education@gmail.com
+(Bai code ca nhan - chi nop tren branch rieng, khong merge vao main)
+
 Instructions:
     1. Define your strict SYSTEM_PROMPT below, detailing the operational boundaries.
     2. Complete the TODO inside evaluate_prompt() using Google Gemini 2.5 SDK.

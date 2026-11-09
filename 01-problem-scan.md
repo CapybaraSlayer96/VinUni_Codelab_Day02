@@ -1,7 +1,15 @@
 # 01 — Problem Scan & Quick Cards
 
-**Nhóm:** _(điền tên nhóm)_
-**Thành viên thực hiện phần này:** Hùng — hungvu.education@gmail.com
+**Nhóm:** The Hive
+
+**Thành viên:**
+- Đoàn Xuân Duy Bảo — doanxuanduybao96@gmail.com
+- Triệu Quốc Khánh — trieukhanh25032005@gmail.com
+- Vũ Quốc Đạt — dvuquoc60@gmail.com
+- Vũ Tiến Hùng — hungvu.education@gmail.com
+- Hoàng Đức An — anduchoang2701@gmail.com
+
+**Thành viên thực hiện phần này:** Vũ Tiến Hùng — hungvu.education@gmail.com
 
 ---
 

@@ -1,8 +1,14 @@
 # 02 — Deep-Dive Report
 
-**Nhóm:** _(điền tên nhóm)_
+**Nhóm:** The Hive
 **Bài toán chọn:** Xanh SM (GSM) — Xử lý sự cố pin thực địa (Card #1, xem `01-problem-scan.md`)
-**Thành viên:** _(điền Họ tên + email từng thành viên tham gia)_
+
+**Thành viên:**
+- Đoàn Xuân Duy Bảo — doanxuanduybao96@gmail.com
+- Triệu Quốc Khánh — trieukhanh25032005@gmail.com
+- Vũ Quốc Đạt — dvuquoc60@gmail.com
+- Vũ Tiến Hùng — hungvu.education@gmail.com
+- Hoàng Đức An — anduchoang2701@gmail.com
 
 ---
 
