@@ -71,29 +71,15 @@ def evaluate_prompt(user_input: str) -> str:
         from google.genai import types
 
         client = genai.Client(api_key=api_key)
-        base_config = dict(
+        config = types.GenerateContentConfig(
             system_instruction=SYSTEM_PROMPT,
             temperature=0.0,  # Setting to 0 for maximum boundary compliance
         )
-        try:
-            # Tắt bước "thinking" để phản hồi nhanh (autograder giới hạn 30 giây)
-            config = types.GenerateContentConfig(
-                **base_config,
-                thinking_config=types.ThinkingConfig(thinking_budget=0),
-            )
-            response = client.models.generate_content(
-                model=GEMINI_MODEL,
-                contents=user_input,
-                config=config
-            )
-        except Exception:
-            # Model không hỗ trợ tắt thinking → gọi lại với cấu hình mặc định
-            config = types.GenerateContentConfig(**base_config)
-            response = client.models.generate_content(
-                model=GEMINI_MODEL,
-                contents=user_input,
-                config=config
-            )
+        response = client.models.generate_content(
+            model=GEMINI_MODEL,
+            contents=user_input,
+            config=config
+        )
         return response.text or ""
 
     except (ImportError, Exception):
